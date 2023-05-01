@@ -1,0 +1,8 @@
+**This program is used as an interface to test neural networks for force estimation and command robot**
+which contains :
+1.Myo armband Interface 
+2.IMU xsense for probe heading refrence
+3.UDP for kuka connection send/recieve commands
+4.Filtering and run AN/DL networks
+
+** last version 08 Shahrivar 1401 (30 AUG 2022)  
