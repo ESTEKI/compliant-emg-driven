@@ -1,0 +1,67 @@
+# CompilerName=msvcpp150
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = D:\Programs\MATLAB21\Polyspace
+startdir = E:\projects\New projects\myo armband\LSTM
+
+# Toolchain information
+cc = cl
+cxx = cl
+linker = link
+linkerxx = link
+
+cflags =  /c /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I "$root" /I "$startdir" /I "$matlabdir\extern\include\mkldnn" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=LSTMfinal1network_mex -DMW_NEEDS_VERSION_H /wd4251 
+
+cxxflags =   /c /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I "$root" /I "$startdir" /I "$matlabdir\extern\include\mkldnn" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=LSTMfinal1network_mex -DMW_NEEDS_VERSION_H /wd4251 
+
+ldflags =  /nologo /manifest   /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib  /out:"LSTMfinal1network_mex.mexw64" /LIBPATH:"$matlabdir\bin\win64" libiomp5md.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib  "$matlabdir\lib\win64\mwdnnl.lib"
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in /Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in /Fo$out
+
+rule link
+    command = $linker @$out.rsp $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir\MWCNNLayer.obj : cxx $root\MWCNNLayer.cpp
+build $builddir\MWFCLayer.obj : cxx $root\MWFCLayer.cpp
+build $builddir\MWOutputLayer.obj : cxx $root\MWOutputLayer.cpp
+build $builddir\MWRNNLayer.obj : cxx $root\MWRNNLayer.cpp
+build $builddir\MWSequenceInputLayer.obj : cxx $root\MWSequenceInputLayer.cpp
+build $builddir\MWTensorBase.obj : cxx $root\MWTensorBase.cpp
+build $builddir\MWFCLayerImpl.obj : cxx $root\MWFCLayerImpl.cpp
+build $builddir\MWOutputLayerImpl.obj : cxx $root\MWOutputLayerImpl.cpp
+build $builddir\MWRNNLayerImpl.obj : cxx $root\MWRNNLayerImpl.cpp
+build $builddir\MWSequenceInputLayerImpl.obj : cxx $root\MWSequenceInputLayerImpl.cpp
+build $builddir\MWCNNLayerImpl.obj : cxx $root\MWCNNLayerImpl.cpp
+build $builddir\MWTargetNetworkImpl.obj : cxx $root\MWTargetNetworkImpl.cpp
+build $builddir\MWMkldnnUtils.obj : cxx $root\MWMkldnnUtils.cpp
+build $builddir\MWCustomLayerForMKLDNN.obj : cxx $root\MWCustomLayerForMKLDNN.cpp
+build $builddir\LSTMfinal1network_data.obj : cxx $root\LSTMfinal1network_data.cpp
+build $builddir\rt_nonfinite.obj : cxx $root\rt_nonfinite.cpp
+build $builddir\LSTMfinal1network_initialize.obj : cxx $root\LSTMfinal1network_initialize.cpp
+build $builddir\LSTMfinal1network_terminate.obj : cxx $root\LSTMfinal1network_terminate.cpp
+build $builddir\LSTMfinal1network.obj : cxx $root\LSTMfinal1network.cpp
+build $builddir\DeepLearningNetwork.obj : cxx $root\DeepLearningNetwork.cpp
+build $builddir\predict.obj : cxx $root\predict.cpp
+build $builddir\_coder_LSTMfinal1network_api.obj : cxx $root\interface\_coder_LSTMfinal1network_api.cpp
+build $builddir\_coder_LSTMfinal1network_mex.obj : cxx $root\interface\_coder_LSTMfinal1network_mex.cpp
+build $builddir\LSTMfinal1network_mexutil.obj : cxx $root\LSTMfinal1network_mexutil.cpp
+build $builddir\_coder_LSTMfinal1network_info.obj : cxx $root\interface\_coder_LSTMfinal1network_info.cpp
+build $builddir\cpp_mexapi_version.obj : cxx $matlabdir\extern\version\cpp_mexapi_version.cpp
+
+# Link
+build $root\LSTMfinal1network_mex.mexw64 : linkxx $builddir\MWCNNLayer.obj $builddir\MWFCLayer.obj $builddir\MWOutputLayer.obj $builddir\MWRNNLayer.obj $builddir\MWSequenceInputLayer.obj $builddir\MWTensorBase.obj $builddir\MWFCLayerImpl.obj $builddir\MWOutputLayerImpl.obj $builddir\MWRNNLayerImpl.obj $builddir\MWSequenceInputLayerImpl.obj $builddir\MWCNNLayerImpl.obj $builddir\MWTargetNetworkImpl.obj $builddir\MWMkldnnUtils.obj $builddir\MWCustomLayerForMKLDNN.obj $builddir\LSTMfinal1network_data.obj $builddir\rt_nonfinite.obj $builddir\LSTMfinal1network_initialize.obj $builddir\LSTMfinal1network_terminate.obj $builddir\LSTMfinal1network.obj $builddir\DeepLearningNetwork.obj $builddir\predict.obj $builddir\_coder_LSTMfinal1network_api.obj $builddir\_coder_LSTMfinal1network_mex.obj $builddir\LSTMfinal1network_mexutil.obj $builddir\_coder_LSTMfinal1network_info.obj $builddir\cpp_mexapi_version.obj 

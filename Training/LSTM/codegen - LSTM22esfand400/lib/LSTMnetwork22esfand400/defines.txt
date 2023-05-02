@@ -1,0 +1,1 @@
+MODEL=LSTMnetwork22esfand400

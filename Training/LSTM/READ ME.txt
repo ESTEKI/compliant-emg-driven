@@ -1,0 +1,3 @@
+prepare data 
+Run butterworthfilter
+use testseginput layer to train LSTM
