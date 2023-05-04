@@ -19,7 +19,7 @@ It is the main code to recieve commands from human at the master side and then c
 # What is the KUKA:
 This code is the JAVA code running on KUKA station. Its job is to execute force and probe pose commands recieved from master, and also detect human intervention and to become compliant. 
 
-# What is the Training:]
+# What is the Training:
 Matlab codes that were used to analyse datasets, train LSTM/ANN models and then generate c++ code.
 
 
