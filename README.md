@@ -1,5 +1,6 @@
 # compliant-emg-driven
 An EMG-driven KUKA LBR iiwa14 robot for tele-operated Ultra Sound Imaging setup
+Link to Video Demo : https://www.linkedin.com/posts/siavash-esteki_roboticsolutions-hri-usimaging-activity-7069267503180312576-9u0K?utm_source=share&utm_medium=member_desktop
 # Overview:
 In this project, an operator controls a robot manipulator equipped with an Ultra-sound imaging probe from a remote location.
 He/she wears a MyoArmband EMG sensor on their arm which is used as an input to the Neural Networks to estimate the force to be applied by the robot for better US examination. 
