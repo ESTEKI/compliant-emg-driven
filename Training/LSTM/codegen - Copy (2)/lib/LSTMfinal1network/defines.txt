@@ -1,1 +1,0 @@
-MODEL=LSTMfinal1network
