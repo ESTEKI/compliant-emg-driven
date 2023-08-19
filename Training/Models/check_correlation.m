@@ -1,14 +1,17 @@
-[file,path]  = uigetfile('*.mat'); % Navigate to 'datasets' folder and select any dataset
-                                   % like 'rawforceEmgdata90deg_22_esfand_400.mat'
-data = struct2cell(load(fullfile(path,file)));
-data = data{1};
+%[file,path]  = uigetfile('*.mat'); % Navigate to 'datasets' folder and select any dataset
 
-rectEMG = abs(data(:,1:8));
+%data = struct2cell(load(fullfile(path,file)));
+%data = data{1};
+
+rectEMG = abs(data);
+force = data(:,11);
+correlations = corr(data(:,1:8), force(force>0) );
+[~, electrode_indices] = maxk(correlations, 3);
+
 close all
 
 
 %tiledlayout(8,1);
-%4+ 2- 1- for dataset A
 
 %3+ 8 7- for final lstm1
 %3+ 7- 8- for rawforceEmgdata90degFinal_LSTM2_1aban400

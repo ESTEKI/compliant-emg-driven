@@ -1,22 +1,19 @@
 %Y = net(inputs);
 %Y2 = net1(inputstest);
-%buttinputs_norm = [datafilt(15000:end,3) datafilt(15000:end,7) datafilt(15000:end,8)]' ; 
-%butttorques_norm =  transpose(datafilt4(15000:end));
-%buttinputs_norm = (1-(-1)).*(buttinputs_norm-mn)./(mx-mn)-1;
-%buttinputs_norm = mapminmax(buttinputs,0,2);
-%buttinputs_norm = mapminmax(buttinputs_norm,-1,1);
-%y = (ymax-ymin)*(x-xmin)/(xmax-xmin) + ymin;
-y = predict(net,buttinputs);
-y = mapminmax('reverse',y,maxminOutput);
 
-hold on 
-%plot(torqes);
-butttorques_norm = mapminmax('reverse',butttorques,maxminOutput) ;
-plot(butttorques_norm);
-% butttorques_norm = butttorques;
-%y = -1*y;
-%y=y*sigT+muT;
-plot(y);
+ffnn_y = ffnn_net(x);
+
+rmse = rmse(ffnn_y,butttorques);
+r = regression(ffnn_y ,butttorques);
+Rsq = 1 - sum(( ffnn_y-butttorques ).^2)/sum(( ffnn_y- mean(butttorques)).^2);
+FFNN_performances = [ rmse r Rsq]
+hold on
+plot(ffnn_y)
+plot(butttorques)
+legend('original','network output');
+
+
+
 %https://www.mathworks.com/matlabcentral/answers/165233-neural-network-how-does-neural-network-calculate-output-from-net-iw-net-lw-net-b
 %to test network using net.IW and net.LW 
 %matlab uses mapminmax function to nirmalize input and target data so
@@ -35,12 +32,3 @@ plot(y);
 %M = movmean(y,[100 0]);
 %plot(M);
 %mse_ = mse(net,butttorques,y)
-mse=0;
-for i=1:length(butttorques_norm)
-mse=mse+(y(i)- butttorques_norm(i))^2;
-end
-mse=mse/length(butttorques_norm)
-r = regression(butttorques_norm,y)
-Rsq2 = 1 - sum((butttorques_norm - y).^2)/sum((butttorques_norm - mean(butttorques_norm)).^2)
-legend('original','network output');
-%title('60deg');

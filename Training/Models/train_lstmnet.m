@@ -49,8 +49,9 @@ options = trainingOptions('adam', ...
     'Plots','training-progress',...
     'Verbose',0);
 
-net = trainNetwork(buttinputs,butttorques,layers,options);
-y = predict(net,buttinputs);
+lstm_net = trainNetwork(buttinputs,butttorques ...
+   ,layers,options);
+y = predict(lstm_net,buttinputs);
 plot(y);
 hold on ;
 plot(butttorques);
