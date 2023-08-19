@@ -1,14 +1,25 @@
+% After training networks, use this program to calculate RMSE, R and
+% R-squared performance index
 %Y = net(inputs);
 %Y2 = net1(inputstest);
 
-ffnn_y = ffnn_net(x);
+ffnn_y = ffnn_net(buttinputs);
 
-rmse = rmse(ffnn_y,butttorques);
+RMSE = rmse(ffnn_y,butttorques);
 r = regression(ffnn_y ,butttorques);
 Rsq = 1 - sum(( ffnn_y-butttorques ).^2)/sum(( ffnn_y- mean(butttorques)).^2);
-FFNN_performances = [ rmse r Rsq]
+FFNN_performances = [ RMSE r Rsq]
+
+lstm_y = predict(lstm_net,buttinputs);
+
+RMSE = rmse(lstm_y,butttorques);
+r = regression(lstm_y ,butttorques);
+Rsq = 1 - sum(( lstm_y-butttorques ).^2)/sum(( lstm_y- mean(butttorques)).^2);
+LSTM_performances = [ RMSE r Rsq]
+
 hold on
 plot(ffnn_y)
+
 plot(butttorques)
 legend('original','network output');
 
