@@ -15,7 +15,7 @@ lstm_y = predict(lstm_net,buttinputs);
 RMSE = rmse(lstm_y,butttorques);
 r = regression(lstm_y ,butttorques);
 Rsq = 1 - sum(( lstm_y-butttorques ).^2)/sum(( lstm_y- mean(butttorques)).^2);
-LSTM_performances = [ RMSE r Rsq]
+LSTM_performances = [RMSE r Rsq]
 
 hold on
 plot(ffnn_y)

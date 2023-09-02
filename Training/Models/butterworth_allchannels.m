@@ -1,12 +1,12 @@
 %% run this section first
  %then run any other two sections 
 [file,path]  = uigetfile('*.mat'); % Navigate to 'datasets' folder and select any dataset
-                                  % like 'rawforceEmgdata90deg_22_esfand_400.mat'
+                                   % like 'rawforceEmgdata90deg_22_esfand_400.mat'
 data = struct2cell(load(fullfile(path,file)));
 data = data{1};
 
 rectEMG = abs(data(:,1:8));
-selectedChannels = [rectEMG(:,4) rectEMG(:,2) rectEMG(:,1)]' ; %use plotandsee.m to choose which channelt to input network
+selectedChannels = [rectEMG(:,4) rectEMG(:,7) rectEMG(:,8)]' ; %use onlyplotandsee.m to choose which channels to input to network
 close all
 fc = 3;%hz cut off frequency
 fs = 178;%sampling frequency

@@ -1,0 +1,4 @@
+tables in result section of paper for EMG to force estimation
+ First table is A
+Second table is B
+Third table is Rabii C

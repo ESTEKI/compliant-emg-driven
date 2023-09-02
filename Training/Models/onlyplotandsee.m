@@ -5,11 +5,12 @@ data = data{1};
 
 rectEMG = abs(data(:,1:8));
 close all
-
+%%
 
 %tiledlayout(8,1);
 %4+ 2- 1- for dataset A
-
+%3+ 5- 8- for dataset B
+%4+ 7- 8- for Dataset C rabii
 %3+ 8 7- for final lstm1
 %3+ 7- 8- for rawforceEmgdata90degFinal_LSTM2_1aban400
 %3+ 7- 8- for rawforceEmgdata90degFinalLSTM3
