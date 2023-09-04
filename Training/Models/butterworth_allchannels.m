@@ -6,7 +6,7 @@ data = struct2cell(load(fullfile(path,file)));
 data = data{1};
 
 rectEMG = abs(data(:,1:8));
-selectedChannels = [rectEMG(:,4) rectEMG(:,7) rectEMG(:,8)]' ; %use onlyplotandsee.m to choose which channels to input to network
+selectedChannels = [rectEMG(:,3) rectEMG(:,1) rectEMG(:,8)]' ; %use onlyplotandsee.m to choose which channels to input to network
 close all
 fc = 3;%hz cut off frequency
 fs = 178;%sampling frequency

@@ -4,9 +4,9 @@
 % dataKUKA = struct2cell( load('UltrasoundImaging2resultsLSTM3azar1.mat'));
 % dataKUKA = dataKUKA{1};
 
-dataPC = struct2cell( load('logFile3azar1400FFNNresults1.mat'));
+dataPC = struct2cell( load('logFile9shahrivar1401_results3_LSTM.mat'));
 dataPC = dataPC{1};
-dataKUKA = struct2cell( load('UltrasoundImaging2resultsFFNN3azar1.mat'));
+dataKUKA = struct2cell( load('UltrasoundImaging_results3LSTM9shahrivar1401.mat'));
 dataKUKA = dataKUKA{1};
 
 %%
