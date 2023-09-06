@@ -6,7 +6,7 @@ data = struct2cell(load(fullfile(path,file)));
 data = data{1};
 
 rectEMG = abs(data(:,1:8));
-selectedChannels = [rectEMG(:,3) rectEMG(:,1) rectEMG(:,8)]' ; %use onlyplotandsee.m to choose which channels to input to network
+selectedChannels = [rectEMG(:,5) rectEMG(:,1) rectEMG(:,8)]' ; %use onlyplotandsee.m to choose which channels to input to network
 close all
 fc = 3;%hz cut off frequency
 fs = 178;%sampling frequency
@@ -26,20 +26,20 @@ plot(datafilt(1,:));
 figure
 plot(buttinputs(1,:));
 %% first range data then filter
- [dataRanged,maxminInput] = mapminmax(selectedChannels,-1,1);
- [dataOut, maxminOutput] = mapminmax( data(:,11)',-1,1);%force along Z axis is 11th column of data 
-
- 
-% maxminInput.xmax
-% maxminInput.xmin
+%  [dataRanged,maxminInput] = mapminmax(selectedChannels,-1,1);
+%  [dataOut, maxminOutput] = mapminmax( data(:,11)',-1,1);%force along Z axis is 11th column of data 
 % 
-% maxminOutput.xmax
-% maxminOutput.xmin
-plot(dataRanged(2,:));
-figure
-buttinputs(1,:) = filter(b,a,dataRanged(1,:));
-buttinputs(2,:) = filter(b,a,dataRanged(2,:));
-buttinputs(3,:) = filter(b,a,dataRanged(3,:));
+%  
+% % maxminInput.xmax
+% % maxminInput.xmin
+% % 
+% % maxminOutput.xmax
+% % maxminOutput.xmin
+% plot(dataRanged(2,:));
+% figure
+% buttinputs(1,:) = filter(b,a,dataRanged(1,:));
+% buttinputs(2,:) = filter(b,a,dataRanged(2,:));
+% buttinputs(3,:) = filter(b,a,dataRanged(3,:));
 butttorques = filter(b,a,dataOut);
 
 plot(buttinputs(2,:));

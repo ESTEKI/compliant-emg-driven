@@ -1,13 +1,13 @@
 %%
-% dataPC = struct2cell( load('logFile3azar1400LSTMresults1.mat'));
-% dataPC = dataPC{1};
-% dataKUKA = struct2cell( load('UltrasoundImaging2resultsLSTM3azar1.mat'));
-% dataKUKA = dataKUKA{1};
-
-dataPC = struct2cell( load('logFile9shahrivar1401_results3_LSTM.mat'));
+dataPC = struct2cell( load('logFile9shahrivar1401_results3_FFNN.mat'));
 dataPC = dataPC{1};
-dataKUKA = struct2cell( load('UltrasoundImaging_results3LSTM9shahrivar1401.mat'));
+dataKUKA = struct2cell( load('UltrasoundImaging_results3_FFAN_9shahrivar1401.mat'));
 dataKUKA = dataKUKA{1};
+
+% dataPC = struct2cell( load('logFile9shahrivar1401_results3_LSTM.mat'));
+% dataPC = dataPC{1};
+% dataKUKA = struct2cell( load('UltrasoundImaging_results3LSTM9shahrivar1401.mat'));
+% dataKUKA = dataKUKA{1};
 
 %%
 
@@ -43,6 +43,11 @@ EstimatedTorque(logicindexing==1) = [];
 ActualTorque(logicindexing==1) = [];
 kukaForcez(logicindexing==1) = [];
 
+ActualTorque(ActualTorque>2)=0;%remove outliars
+ActualTorque(ActualTorque<-60)=-40;%remove outliars
+ActualTorque = movmean(ActualTorque,2);
+
+EstimatedTorque = EstimatedTorque-0;
 
 rmse1 = rmse(ActualTorque,EstimatedTorque); 
 r_1 = regression(ActualTorque',EstimatedTorque'); 
