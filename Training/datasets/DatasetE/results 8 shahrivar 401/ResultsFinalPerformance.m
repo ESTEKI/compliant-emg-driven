@@ -1,13 +1,13 @@
 %%
-dataPC = struct2cell( load('logFile9shahrivar1401_results3_FFNN.mat'));
-dataPC = dataPC{1};
-dataKUKA = struct2cell( load('UltrasoundImaging_results3_FFAN_9shahrivar1401.mat'));
-dataKUKA = dataKUKA{1};
-
-% dataPC = struct2cell( load('logFile9shahrivar1401_results3_LSTM.mat'));
+% dataPC = struct2cell( load('logFile9shahrivar1401_results3_FFNN.mat'));
 % dataPC = dataPC{1};
-% dataKUKA = struct2cell( load('UltrasoundImaging_results3LSTM9shahrivar1401.mat'));
+% dataKUKA = struct2cell( load('UltrasoundImaging_results3_FFAN_9shahrivar1401.mat'));
 % dataKUKA = dataKUKA{1};
+
+dataPC = struct2cell( load('logFile9shahrivar1401_results3_LSTM.mat'));
+dataPC = dataPC{1};
+dataKUKA = struct2cell( load('UltrasoundImaging_results3LSTM9shahrivar1401.mat'));
+dataKUKA = dataKUKA{1};
 
 %%
 
@@ -65,11 +65,28 @@ Rsq23 = 1 - sum((ActualTorque - kukaForcez ).^2)/sum((ActualTorque - mean(kukaFo
 performanceActual_kukaForce = [ rmse3 r_3 Rsq23]
 
 format long
+% hold on 
+% plot(ActualTorque);
+% plot(EstimatedTorque);
+% plot(kukaForcez);
+% legend('Actual Force','Estimated Force','Robot end-effector force')
+
+kukaForcez(kukaForcez<-50)=-40;%remove outliars for better illustration
+
+figure('Position', [100, 100, 1200, 600]);
 hold on 
-plot(ActualTorque);
-plot(EstimatedTorque);
-plot(kukaForcez);
-legend('Actual Force','Estimated Force','kukaforce')
+plot(ActualTorque, 'b-', 'LineWidth', 1.5);
+plot(EstimatedTorque, 'r-', 'LineWidth', 1.5);
+plot(kukaForcez, 'g-.', 'LineWidth', 1);
+
+xlabel('Time Step');
+ylabel('F (N)');
+title('Comparison of Actual, Estimated, and Robot End-effector Force in Real-time Setup Using LSTM'); 
+grid on;
+
+legend('Actual Force (N)', 'Estimated Force (N)', 'Kuka end-effector Force (N)', 'Location', 'Northwest');
+saveas(gcf, 'LSTM_realitime_8sh401.png');
+%xlim([start_time, end_time]); % Set your desired time range
 
 % prompt = 'Save results? : ';
 % userIn = input(prompt,'s');
