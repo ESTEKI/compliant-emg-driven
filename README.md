@@ -8,8 +8,8 @@ On the other side, robot excerts the estimated force of the human operator on th
 
 # disclaimer
 * Codes are by no means optimized
-* Must not be used as any form on any actual setup
-
+* Must not be used in any form on any clinical setup without prior checks
+  
 # What is the Interface:
 It is the main code to recieve commands from human at the master side and then command the robot on remote side. Therefore, this code contains multiple parts as bellow:
 1- Read MyoArmband raw EMG data.
@@ -17,7 +17,7 @@ It is the main code to recieve commands from human at the master side and then c
 3- Read joystick data containing an xSense IMU for probe heading and operator PC mouse for US probe location on patient body.
 4- Transmit probe heading adn position along with desired force over UDP to KUKA robot
 
-# What is the KUKA:
+# What is the KUKA/emg_mirroing:
 This code is the JAVA code running on KUKA station. Its job is to execute force and probe pose commands recieved from master, and also detect human intervention and to become compliant. 
 
 # What is the Training:
