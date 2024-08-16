@@ -22,32 +22,60 @@ close all
 %11 is for forcez
 %IMPORTANT**
 %
-
-for ii = 1:8
-    
-    figure
-    hold on
-    plot(data(:,ii)); 
-    plot(data(:,11));
-    title(['EMG',num2str(ii)])
-end
+datapoints = 4000;
+% for ii = 1:8
+%     
+%     figure
+%     hold on
+%     plot(data(:,ii)); 
+%     plot(data(:,11));
+%     title(['EMG',num2str(ii)], 'FontWeight', 'bold', 'FontSize', 14);
+% end
 figure
 for ii = 1:8
     subplot(9,1,ii);
-  % 
     hold on
-    plot(data(1:4000,ii),'-b');% view(0,0); 
+    plot(data(1:datapoints,ii),'-b'); 
     
-    %if ii>1
-        set(gca,'XTick',[]);
-     %   set(gca,'YTick',[]);
-    %end
-    title(['EMG',num2str(ii)])
+    % Remove XTicks
+    set(gca,'XTick',[]); 
+    
+    % Set constant Y-axis limits for subplots 1 to 8
+    ylim([-100 100]);
+    
+    % Set Y-axis label on the left side
+    ylabel(['EMG', num2str(ii)], 'FontWeight', 'bold', 'FontSize', 12);
+    
+    % Add a secondary Y-axis on the right side
+    yyaxis right;
+    
+    % Set the Y-axis limits for the right side (same as the left)
+    ylim([-100 100]);
+    
+    % Set the Y-axis on the right to display tick labels
+    set(gca, 'YColor', 'k'); % Set color of the Y-axis ticks to black
+    
+    % Hide the tick labels on the left side
+    yyaxis left;
+    set(gca, 'YTickLabel', []);
+
 end
+% Last subplot for the elbow force (no Y-axis limits specified)
 subplot(9,1,9);
-%for better visualization  multiply torques by 4 no
-    plot(data(1:4000,11),'-b','LineWidth',1);
-    title('Elbow ForceZ');
+plot(data(1:datapoints,11),'-b','LineWidth',2);
+
+% Set Y-axis label for the last plot on the left side
+ylabel('Force', 'FontWeight', 'bold', 'FontSize', 12);
+set(gca, 'YTickLabel', []);
+
+% Add a secondary Y-axis on the right side for the last subplot
+yyaxis right;
+
+% Optionally set Y-axis limits for the last subplot if needed
+ylim([-50 25]);  % Add a specific range if required
+
+% Set the Y-axis on the right to display tick labels
+set(gca, 'YColor', 'k');
   %  print('FillPageFigure','-dpdf','-fillpage')
 %title('EMG3 vs torque in emg_elbowTorque60degAban98'); 
 
