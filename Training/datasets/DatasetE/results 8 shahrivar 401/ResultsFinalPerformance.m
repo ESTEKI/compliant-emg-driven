@@ -16,7 +16,7 @@ begin_ffnn = 2090;
 range_num = 3480;
 
 % Initialize figure
-figure('Position', [100, 100, 1200, 600]);
+figure('Position', [0, 0, 1200, 1200]);
 
 % Process and plot LSTM data
 subplot(2, 1, 1); % Create a subplot in the first row
@@ -28,10 +28,13 @@ plot(kukaForcez_lstm(begin_lstm:begin_lstm+range_num), 'g-.', 'LineWidth', 1);
 %xlabel('Time Step');
 ylabel('Force [N]');
 title('LSTM Results');
-legend({'Actual Force', 'Estimated Force', 'End-effector Force'}, 'Location', 'Northwest');
+legend({'Actual', 'Estimated', 'End-effector'}, ...
+    'Location', 'southwest', 'Orientation', 'horizontal', 'Box', 'off');
 grid on;
 hold off;
-
+% Adjust the position of the first subplot to reduce space below it
+%subplot(2, 1, 1);
+set(gca, 'Position', [0.1, 0.55, 0.85, 0.4]); % [left, bottom, width, height]
 % Process and plot FFNN data
 subplot(2, 1, 2); % Create a subplot in the second row
 [EstimatedTorque_ffnn, ActualTorque_ffnn, kukaForcez_ffnn] = processForceData(dataPC_ffnn, dataKUKA_ffnn);
@@ -45,9 +48,13 @@ plot(kukaForcez_ffnn(begin_ffnn:begin_ffnn+range_num), 'g-.', 'LineWidth', 1);
 xlabel('Time Step');
 ylabel('Force [N]');
 title('FFNN Results');
-legend({'Actual Force', 'Estimated Force', 'End-effector Force'}, 'Location', 'Northwest');
+legend({'Actual', 'Estimated', 'End-effector'}, ...
+    'Location', 'southwest', 'Orientation', 'horizontal', 'Box', 'off');
 grid on;
 hold off;
+% Adjust the position of the second subplot to bring it closer to the first subplot
+subplot(2, 1, 2);
+set(gca, 'Position', [0.1, 0.05, 0.85, 0.4]); % [left, bottom, width, height]
 
 % Adjust layout for better visualization
 %sgtitle('Comparison of LSTM and FFNN Results'); % Super title for the entire figure
