@@ -12,7 +12,7 @@ format long
 
 % Parameters
 begin_lstm = 1460;
-begin_ffnn = 2090;
+begin_ffnn = 1;
 range_num = 3480;
 
 % Initialize figure

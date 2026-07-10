@@ -22,9 +22,9 @@ hiddenLayerSize = 8;
 ffnn_net = fitnet(hiddenLayerSize,trainFcn);
 
 % Setup Division of Data for Training, Validation, Testing
-ffnn_net.divideParam.trainRatio = 70/100;
-ffnn_net.divideParam.valRatio = 15/100;
-ffnn_net.divideParam.testRatio = 15/100;
+ffnn_net.divideParam.trainRatio = 90/100;
+ffnn_net.divideParam.valRatio = 5/100;
+ffnn_net.divideParam.testRatio = 5/100;
 
 % Train the Network
 [ffnn_net,tr] = train(ffnn_net,x,t);

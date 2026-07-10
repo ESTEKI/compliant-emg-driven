@@ -19,10 +19,19 @@ close all
 %4+ 1- 8- rawforceEmgdata90deg_17_esfanf_400
 %4+ 1- 8- rawforceEmgdata90deg_22_esfand_400
 %5+ 1- 8- DatasetE 8shahrivar 1401
+%4+ 7- 8- for zoh1 and 2
+%1- 8- 5+ for mey1 K
+%3+ 5- 6- for mey2 
+%3- 6- 7+ for sey1
+%1- 2- 4+ sey2
+
+
+
 %11 is for forcez
 %IMPORTANT**
 %
-datapoints = 4000;
+force_col = 9; % force columns in dataset from G to last is 9th
+datapoints =3399;% length(data);%3399;
 % for ii = 1:8
 %     
 %     figure
@@ -62,7 +71,7 @@ for ii = 1:8
 end
 % Last subplot for the elbow force (no Y-axis limits specified)
 subplot(9,1,9);
-plot(data(1:datapoints,11),'-b','LineWidth',2);
+plot(data(1:datapoints,force_col),'-b','LineWidth',2);
 
 % Set Y-axis label for the last plot on the left side
 ylabel('Force', 'FontWeight', 'bold', 'FontSize', 12);
@@ -72,7 +81,7 @@ set(gca, 'YTickLabel', []);
 yyaxis right;
 
 % Optionally set Y-axis limits for the last subplot if needed
-ylim([-50 25]);  % Add a specific range if required
+%ylim([-50 25]);  % Add a specific range if required
 
 % Set the Y-axis on the right to display tick labels
 set(gca, 'YColor', 'k');

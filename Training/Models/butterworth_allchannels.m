@@ -6,7 +6,7 @@ data = struct2cell(load(fullfile(path,file)));
 data = data{1};
 
 rectEMG = abs(data(:,1:8));
-selectedChannels = [rectEMG(:,5) rectEMG(:,1) rectEMG(:,8)]' ; %use onlyplotandsee.m to choose which channels to input to network
+selectedChannels = [rectEMG(:,3) rectEMG(:,6) rectEMG(:,7)]' ; %use onlyplotandsee.m to choose which channels to input to network
 close all
 fc = 3;%hz cut off frequency
 fs = 178;%sampling frequency
@@ -14,17 +14,20 @@ order = 3;
 [b,a] = butter(order,fc/(fs/2));
 %% filter then range
 %This is the method used in project
-datafilt(1,:) = filter(b,a,selectedChannels(1,:));
-datafilt(2,:) = filter(b,a,selectedChannels(2,:));
-datafilt(3,:) = filter(b,a,selectedChannels(3,:));
-datafiltoutput = filter(b,a,data(:,11));
+datarange_from_dataset = 1:3148;
+force_col=9; %for new data after datasetF =9
+
+datafilt(1,:) = filter(b,a,selectedChannels(1,datarange_from_dataset));
+datafilt(2,:) = filter(b,a,selectedChannels(2,datarange_from_dataset));
+datafilt(3,:) = filter(b,a,selectedChannels(3,datarange_from_dataset));
+datafiltoutput = filter(b,a,data(datarange_from_dataset,force_col));
 plot(datafilt(1,:));
 
 
 [buttinputs,maxminInput] = mapminmax(datafilt,-1,1);
 [butttorques, maxminOutput] = mapminmax( datafiltoutput',-1,1);%force along Z axis is 11th column of data 
 figure
-plot(buttinputs(1,:));
+plot(butttorques(1,:));
 %% first range data then filter
 %  [dataRanged,maxminInput] = mapminmax(selectedChannels,-1,1);
 %  [dataOut, maxminOutput] = mapminmax( data(:,11)',-1,1);%force along Z axis is 11th column of data 
